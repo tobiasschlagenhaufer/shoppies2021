@@ -1,5 +1,6 @@
-import { FETCH_MOVIES } from '../actions/types';
+import { FETCH_MOVIES, ADD_MOVIE } from '../actions/types';
 const API_KEY = '8140e84f';
+// const API_KEY = '1234';
 
 export const fetchMovies = (search) => dispatch => {
     // check that variable is good
@@ -12,6 +13,7 @@ export const fetchMovies = (search) => dispatch => {
             dispatch({
                 type: FETCH_MOVIES,
                 payload: results["Search"],
+                error: null,
             });
         } else {
             dispatch({
@@ -21,6 +23,13 @@ export const fetchMovies = (search) => dispatch => {
             });
         }
         
+    });
+}
+
+export const nominateMovie = (movie) => dispatch => {
+    dispatch({
+        type: ADD_MOVIE,
+        payload: movie
     });
 }
 
