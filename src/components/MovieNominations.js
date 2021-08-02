@@ -4,22 +4,23 @@ import MovieNominationCard from './MovieNominationCard'
 
 class MovieNominations extends Component {
     render() {
-        console.log(this.props.movies);
-        if (this.props.error) {
-            return (
-                <div className="movie-nominations">
-                    <p>{this.props.error}</p>
-                </div>
-            );
-        } else {
-            return (
-                <div className="movie-nominations">
-                    { this.props.movies.map(movie => (
-                        <MovieNominationCard movie={movie} />
-                    ))}
-                </div>
-            );
-        }
+        return (
+            <div className="movie-nominations">
+                <div className="movie-reel">
+                    <div className="sidebar">
+
+                    </div>
+                    <div className="movie-reel-center">
+                        { this.props.movies.map(movie => (
+                            <MovieNominationCard movie={movie} key={movie["imdbID"]}/>
+                        ))}
+                    </div>
+                    <div className="sidebar">
+
+                    </div>
+                </div> 
+            </div>
+        );
         
     }
 }

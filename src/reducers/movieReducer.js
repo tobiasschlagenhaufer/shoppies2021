@@ -24,9 +24,9 @@ export default function reduce(state = initialState, action) {
                     nom_error: "Movie already nominated."
                 }
             }
-            state.nominated.push(action.payload);
             return {
                 ...state,
+                nominated: [...state.nominated, action.payload],
                 nom_error: null
             }
         default:

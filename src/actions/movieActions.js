@@ -5,6 +5,13 @@ const API_KEY = '8140e84f';
 export const fetchMovies = (search) => dispatch => {
     // check that variable is good
 
+    // reset the search results
+
+    dispatch({
+        type: FETCH_MOVIES,
+        payload: [],
+    });
+
     fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&s=${search}`)
     .then(res => res.json())
     .then(results => {

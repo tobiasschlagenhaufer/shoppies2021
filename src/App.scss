@@ -1,7 +1,7 @@
 // @import "~bootstrap/scss/bootstrap";
 
 $test-border: 1px solid #e0e0e0;
-$color: green;
+$shop-green: #2E4435;
 $medium-font: 1.5rem;
 
 .App {
@@ -96,12 +96,32 @@ $medium-font: 1.5rem;
   grid-column: 2;
   grid-row: 1 / 4;
   border: $test-border;
+  background-color: $shop-green;
 }
 
 .movie-nom-card {
-  height: 10rem;
+  height: 7rem;
   display: flex;
   border: $test-border;
+  min-width: 15rem;
+  margin: 0.5rem;
+  border-radius: 10px;
+}
+
+.movie-nom-card > img {
+  border-radius: 10px 0 0 10px;
+}
+
+.movie-reel {
+  display: flex;
+}
+
+.sidebar {
+  width: 5rem;
+}
+
+.movie-reel-center {
+  
 }
 
 .center {
