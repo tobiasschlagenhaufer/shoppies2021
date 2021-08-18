@@ -1,28 +1,40 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import MovieNominationCard from './MovieNominationCard'
+import MovieNominationCard, {holes} from './MovieNominationCard';
+import { useTransition } from 'react-spring';
 
-class MovieNominations extends Component {
-    render() {
+const MovieNominations = (props) => {
+
+    const movieTransition = useTransition(props.movies, {
+        from: {marginTop: -100, opacity: 0},
+        enter: {marginTop: 0, opacity: 1},
+    })
+
+    const lastCard = () => {
         return (
-            <div className="movie-nominations">
-                <div className="movie-reel">
-                    <div className="sidebar">
-
+            <div className="movie-reel">
+                <div className="sidebar sb-lite">
+                    {holes()}
+                </div>
+                <div className="movie-reel-center">
+                    <div className="movie-nom-last">
                     </div>
-                    <div className="movie-reel-center">
-                        { this.props.movies.map(movie => (
-                            <MovieNominationCard movie={movie} key={movie["imdbID"]}/>
-                        ))}
-                    </div>
-                    <div className="sidebar">
-
-                    </div>
-                </div> 
+                </div>
+                <div className="sidebar sb-lite">
+                    {holes()}
+                </div>
             </div>
-        );
-        
+        )
     }
+
+    return (
+        <div className="movie-nominations">
+            { movieTransition((styles, movie) => (
+                <MovieNominationCard movie={movie} key={movie["imdbID"]} styles={styles}/>
+            ))}
+            {/* { lastCard() } */}
+        </div>
+    );
 }
 
 const mapStateToProps = state => ({

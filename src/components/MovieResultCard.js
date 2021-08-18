@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { nominateMovie } from '../actions/movieActions';
 import { connect } from 'react-redux';
+import { animated } from 'react-spring';
 
 class MovieResultCard extends Component {
 
@@ -11,11 +12,11 @@ class MovieResultCard extends Component {
 
     render() {
         return (
-            <div className="movie-res-card">
+            <animated.div style={this.props.style} className="movie-res-card">
                 <img src={this.props.movie["Poster"]} />
                 <p>{this.props.movie["Title"]}</p>
                 <button className="movie-res-btn center" onClick={this.onClick}>+</button>
-            </div>
+            </animated.div>
         );
     }
 }

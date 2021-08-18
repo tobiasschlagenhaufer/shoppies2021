@@ -1,21 +1,32 @@
 // @import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Playball&display=swap');
 
-$test-border: 1px solid #e0e0e0;
+// $test-border: 1px solid #e0e0e0;
+$test-border: none;
 $shop-green: #2E4435;
-$medium-font: 1.5rem;
+$shop-cream: #F7F8EC;
+$btn-green: #296F3F;
+$medium-font: 1.2rem;
+
+body {
+  height: 100vh;
+  background: linear-gradient(180deg, $shop-cream 50%, $shop-green 50%);
+}
 
 .App {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(384px, 1fr));
-  grid-gap: 16px;
-  margin: 3rem;
+  grid-gap: 6px;
+  margin: 0 3rem;
 }
 
 .navbar {
   display: flex;
-  grid-column: 1;
+  grid-column: 1 / 3;
   grid-row: 1;
   border: $test-border;
+  height: 15vh;
+  margin-left: 18%;
 }
 
 .logo {
@@ -23,21 +34,37 @@ $medium-font: 1.5rem;
   height: 3rem;
 }
 
+.desc-box {
+  font-family: "Playball";
+  color: #FFD700;
+}
+
+.desc-lg {
+  font-size: 2rem;
+}
+
+.desc-sm {
+  font-size: 1.6rem;
+}
+
 .search {
-  grid-column: 1;
+  grid-column: 1 / 3;
   grid-row: 2;
   border: $test-border;
+  height: 35vh;
+  margin-left: 18%;
 }
 
 .search-box {
-  margin-top: 10rem;
+  margin-top: 2rem;
 }
 
 .search-input {
   border-radius: 0.5rem 0 0 0.5rem;
   border-right: none;
   font-size: $medium-font;
-  padding: 1rem;
+  padding: 0.8rem 1.5rem;
+  border-color: white;
 }
 
 .search-input:focus {
@@ -48,22 +75,36 @@ $medium-font: 1.5rem;
   color: white;
   border-radius: 0 0.5rem 0.5rem 0;
   border-left: none;
+  border-color: white;
   font-size: $medium-font;
-  padding: 1rem;
-  background-color: green;
+  padding: 0.8rem 1.5rem;
+  background-color: $btn-green;
 }
 
 .movie-results {
-  grid-column: 1;
+  height: 45vh;
+  grid-column: 1 / 3;
   grid-row: 3;
   border: $test-border;
   display: flex;
+  overflow-x: hidden;
+  // background-color: rgba(243, 243, 243, 0.21);
+}
+
+.movie-res-cards {
+  display: flex;
+  overflow-x: hidden;
+  width: 39rem;
 }
 
 .movie-res-card {
-  max-width:  10rem;
-  border: $test-border;
+  max-width: 8.5rem;
+  // border: $test-border;
+  border: 3px solid #FFD700;
   position: relative;
+  margin-left: 10px;
+  background-color: white;
+  border-radius: 10px;
 }
 
 .movie-res-card:hover >*{
@@ -74,11 +115,29 @@ $medium-font: 1.5rem;
 .movie-res-btn {
   display: none;
   z-index: 100;
-  font-size: 2rem;
+  font-size: 4rem;
   border-radius: 50%;
-  width: 3rem;
-  height: 3rem;
+  width: 5rem;
+  height: 5rem;
   margin: auto;
+  background-color: $btn-green;
+  color: white;
+  border-color: white;
+}
+
+.res-btn-right {
+  float: right;
+}
+
+.res-btn {
+  font-size: 3rem;
+  border-radius: 50%;
+  width: 4rem;
+  height: 4rem;
+  margin: auto;
+  background-color: $btn-green;
+  color: white;
+  border-color: white;
 }
 
 .movie-res-card:hover > .movie-res-btn {
@@ -88,24 +147,25 @@ $medium-font: 1.5rem;
 
 .movie-res-card img {
   height: 15rem;
-  width: 10rem;
+  width: 8.5rem;
   object-fit: cover;
+  border-radius: 10px 10px 0 0;
 }
 
 .movie-nominations {
-  grid-column: 2;
-  grid-row: 1 / 4;
+  grid-column: 3;
+  grid-row: 1/4;
   border: $test-border;
-  background-color: $shop-green;
+  width: 18rem;
 }
 
 .movie-nom-card {
   height: 7rem;
   display: flex;
   border: $test-border;
-  min-width: 15rem;
-  margin: 0.5rem;
+  margin-top: 10px;
   border-radius: 10px;
+  background-color: $shop-cream;
 }
 
 .movie-nom-card > img {
@@ -113,15 +173,43 @@ $medium-font: 1.5rem;
 }
 
 .movie-reel {
+  margin: 0;
   display: flex;
+  flex-direction: row;
+  overflow-y: auto;
+  background-color: #FFD700;
+  border: $test-border;
 }
 
 .sidebar {
-  width: 5rem;
+  min-width: 1.2rem;
+  max-width: 2rem;
+  border: $test-border;
+  margin: 0 5px;
+  overflow-y: hidden;
+  max-height: 8rem;
+}
+
+.sb-lite {
+  max-height: 4rem !important;
 }
 
 .movie-reel-center {
-  
+  width: 15rem;
+}
+
+.movie-reel-hole {
+  height: 1.4rem;
+  margin: 10px 6px;
+  background-color: $shop-cream;
+  border-radius: 10px;
+}
+
+.movie-nom-last {
+  height: 3.5rem;
+  margin-top: 10px;
+  border-radius: 40px 40px 0 0;
+  background-color: $shop-cream;
 }
 
 .center {
@@ -130,5 +218,16 @@ $medium-font: 1.5rem;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.movie-res-error {
+  margin-left: 18%;
+  grid-column: 1 / 3;
+  grid-row: 3;
+}
+
+.error-text {
+  font-size: 1.2rem;
+  color: white;
 }
 

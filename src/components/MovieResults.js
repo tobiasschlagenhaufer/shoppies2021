@@ -1,63 +1,69 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import MovieResultCard from './MovieResultCard';
 import { connect } from 'react-redux';
+import { useTransition } from 'react-spring';
 
-class MovieResults extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            showItems: 4,
-            index: 0,
+const MovieResults = (props) => {
+    const [index, setIndex] = useState(0);
+    const [right, setDir] = useState(true);
+    const show = 4;
+    const [showMovies, setShowMovies] = useState([]);
+
+    const forward = () => {
+        if (index < props.movies.length - show){
+            setIndex(index + 1);
+            setDir(true);
         }
     }
 
-    componentDidMount() {
-        this.updateWindowDimensions();
-        window.addEventListener('resize', this.updateWindowDimensions);
-    }
-      
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.updateWindowDimensions);
-    }
-
-    updateWindowDimensions = () => {
-        console.log(window.innerWidth);
-        this.setState({ showItems: ((window.innerWidth - 100) / (2 * 160)), index: this.state.index });
-    }
-
-    forward = () => {
-        if (this.state.index < this.props.movies.length - this.state.showItems){
-            this.setState({index: this.state.index + 1, width: this.state.width});
+    const back = () => {
+        if (index > 0){
+            setIndex(index - 1);
+            setDir(false);
         }
     }
 
-    back = () => {
-        if (this.state.index > 0){
-            this.setState({index: this.state.index - 1, width: this.state.width});
-        }
-    }
+    useEffect(() => {
+        setShowMovies(props.movies.slice(index, index + show));
+    }, [props.movies, index]);
 
-    render() {
-        if (this.props.error) {
-            return (
-                <div className="movie-results">
-                    <p>{this.props.error}</p>
-                </div>
-            );
-        }
+    useEffect(() => {
+        setIndex(0);
+    }, [props.movies]);
+
+    const showMoviesTransitionLeft = useTransition(showMovies, {
+        from: {opacity: 0, marginLeft: -150},
+        enter: {opacity: 1,  marginLeft: 10},
+        leave: {opacity: 0, marginLeft: -150, zIndex: -1}
+    });
+
+    const showMoviesTransitionRight = useTransition(showMovies, {
+        from: {opacity: 0, marginRight: -150},
+        enter: {opacity: 1,  marginRight: 0},
+        leave: {opacity: 0, marginRight: -150, zIndex: -1}
+    });
+
+    if (props.error) {
         return (
-            <div className="movie-results">
-                {/* <MovieResultCard poster={samplePoster} title={"hello"} /> */}
-                <button onClick={this.back}>{'<'}</button>
-
-                {this.props.movies.slice(this.state.index, this.state.index + this.state.showItems).map(movie => (
-                    <MovieResultCard movie={movie} key={movie["imdbID"]}/>
-                ))}
-
-                <button onClick={this.forward}>{'>'}</button>
+            <div className="movie-res-error">
+                <p className="error-text">{props.error} 😞</p>
             </div>
-        )
+        );
     }
+    return (
+        <div className="movie-results">
+
+            {(showMovies.length > 0) ? <button className="res-btn" onClick={back}>{'<'}</button> : null}
+            <div className="movie-res-cards">
+                {(right ? showMoviesTransitionRight : showMoviesTransitionLeft)((styles, movie) => {
+                    return <MovieResultCard movie={movie} key={movie["imdbID"]} style={styles}/>
+                    
+                })}
+            </div>
+
+            {(showMovies.length > 0) ? <button className="res-btn-left res-btn" onClick={forward}>{'>'}</button> : null}
+        </div>
+    );
 }
 
 const mapStateToProps = state => ({

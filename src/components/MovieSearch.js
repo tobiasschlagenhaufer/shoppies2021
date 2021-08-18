@@ -24,6 +24,10 @@ class MovieSearch extends Component {
         return (
             <div className="search">
                 <form onSubmit={this.onSubmit}>
+                    <div className="desc-box">
+                        <p className="desc-lg">Nominate your favourite movies for the Shoppies Awards 🏆</p>
+                        <p className="desc-sm">Start by searching below</p>
+                    </div>
                     <div className="search-box">
                         <input
                             className="search-input"
@@ -33,7 +37,7 @@ class MovieSearch extends Component {
                             onChange={this.onChange}
                         />
 
-                        <button type="submit" className="search-btn">Submit</button>
+                        <button type="submit" className="search-btn">GO</button>
                     </div>
                 </form>
             </div>

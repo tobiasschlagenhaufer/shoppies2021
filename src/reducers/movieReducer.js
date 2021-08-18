@@ -24,9 +24,15 @@ export default function reduce(state = initialState, action) {
                     nom_error: "Movie already nominated."
                 }
             }
+            if (state.nominated.length >= 5) {
+                return {
+                    ...state,
+                    nom_error: "You've already nominated the maximum number of movies."
+                }
+            }
             return {
                 ...state,
-                nominated: [...state.nominated, action.payload],
+                nominated: [action.payload, ...state.nominated],
                 nom_error: null
             }
         default:
