@@ -14,7 +14,9 @@ class MovieResultCard extends Component {
         return (
             <animated.div style={this.props.style} className="movie-res-card">
                 <img src={this.props.movie["Poster"]} />
-                <p>{this.props.movie["Title"]}</p>
+                <div className="movie-res-text">
+                    <p>{this.props.movie["Title"]}</p>
+                </div>
                 <button className="movie-res-btn center" onClick={this.onClick}>+</button>
             </animated.div>
         );

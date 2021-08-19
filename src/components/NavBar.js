@@ -6,7 +6,7 @@ export default class NavBar extends Component {
         return (
             <div className="navbar">
                 <img src={logo} alt="" className="logo"/>
-                <h3>The Shoppies</h3>
+                <h3 className="logo-text">The Shoppies</h3>
             </div>
         )
     }

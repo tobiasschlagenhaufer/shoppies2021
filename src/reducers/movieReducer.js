@@ -1,4 +1,4 @@
-import { ADD_MOVIE, FETCH_MOVIES } from '../actions/types';
+import { ADD_MOVIE, DEL_MOVIE, FETCH_MOVIES } from '../actions/types';
 
 const initialState = {
     results: [],        // List of fetched movies
@@ -34,6 +34,11 @@ export default function reduce(state = initialState, action) {
                 ...state,
                 nominated: [action.payload, ...state.nominated],
                 nom_error: null
+            }
+        case DEL_MOVIE:
+            return {
+                ...state,
+                nominated: state.nominated.filter(movie => movie !== action.payload),
             }
         default:
             return state;

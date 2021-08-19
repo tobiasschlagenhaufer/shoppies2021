@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import MovieNominationCard, {holes} from './MovieNominationCard';
 import { useTransition } from 'react-spring';
+import Modal from 'react-modal';
 
 const MovieNominations = (props) => {
 
     const movieTransition = useTransition(props.movies, {
         from: {marginTop: -100, opacity: 0},
         enter: {marginTop: 0, opacity: 1},
+        leave: {marginTop: -130, opacity: 0.4, zIndex: -1}
     })
 
     const lastCard = () => {
@@ -27,12 +29,21 @@ const MovieNominations = (props) => {
         )
     }
 
+    useEffect(() => {
+        if (props.movies.length >= 3) {
+            document.getElementsByClassName("movie-nom-last")[0].style.backgroundColor = "#2E4435";
+        } else {
+            document.getElementsByClassName("movie-nom-last")[0].style.backgroundColor = "#F7F8EC";
+        }
+    }, [props.movies]);
+
     return (
         <div className="movie-nominations">
             { movieTransition((styles, movie) => (
                 <MovieNominationCard movie={movie} key={movie["imdbID"]} styles={styles}/>
             ))}
-            {/* { lastCard() } */}
+            { lastCard() }
+
         </div>
     );
 }
