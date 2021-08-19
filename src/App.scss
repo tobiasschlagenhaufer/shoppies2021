@@ -297,3 +297,66 @@ body {
   width: 50px;
   height: 50px
 }
+
+.modal-done {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFD700;
+  z-index: 999;
+}
+
+.Modal {
+  position: absolute;
+  top: 15%;
+  left: 25%;
+  right: 25%;
+  bottom: 15%;
+  background-image: url('https://www.pngall.com/wp-content/uploads/4/Golden-Border-PNG-HD-Image.png');
+  background-size: cover;
+  background-color: #2E4435;
+  z-index: 999;
+  border: 30px solid $shop-green;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(204, 204, 204, 0.8);
+  z-index: 999;
+}
+
+.modal-header {
+  color: white;
+  font-family: "Roboto";
+  font-size: 3rem;
+  margin-top: 4rem;
+}
+
+.modal-desc {
+  color: white;
+  font-size: 2rem;
+  margin-top: 4rem;
+}
+
+.modal-close {
+  font-family: "Roboto";
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  border-radius: 50%;
+  color: black;
+  font-size: 2rem;
+  background-color: rgba(231, 220, 220, 1);
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+}

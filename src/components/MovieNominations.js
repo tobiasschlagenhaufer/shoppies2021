@@ -4,7 +4,19 @@ import MovieNominationCard, {holes} from './MovieNominationCard';
 import { useTransition } from 'react-spring';
 import Modal from 'react-modal';
 
+Modal.setAppElement('.App');
+
 const MovieNominations = (props) => {
+
+    const [modalIsOpen, setIsOpen] = React.useState(false);
+
+    const openModal = () => {
+        setIsOpen(true);
+    }
+
+    const closeModal = () => {
+        setIsOpen(false);
+    }
 
     const movieTransition = useTransition(props.movies, {
         from: {marginTop: -100, opacity: 0},
@@ -35,6 +47,10 @@ const MovieNominations = (props) => {
         } else {
             document.getElementsByClassName("movie-nom-last")[0].style.backgroundColor = "#F7F8EC";
         }
+
+        if (props.movies.length == 5) {
+            openModal();
+        }
     }, [props.movies]);
 
     return (
@@ -43,7 +59,21 @@ const MovieNominations = (props) => {
                 <MovieNominationCard movie={movie} key={movie["imdbID"]} styles={styles}/>
             ))}
             { lastCard() }
-
+            <Modal
+                className="Modal"
+                overlayClassName="Overlay"
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                contentLabel="Example Modal"
+            >
+                <button className="modal-close" onClick={closeModal}>X</button>
+                <div className="modal-header">
+                    All Set!
+                </div>
+                <div className="modal-desc">
+                    Your 5 nominated movies are saved.
+                </div>
+            </Modal>
         </div>
     );
 }
