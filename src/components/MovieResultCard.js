@@ -13,7 +13,7 @@ class MovieResultCard extends Component {
     render() {
         return (
             <animated.div style={this.props.style} className="movie-res-card">
-                <img src={this.props.movie["Poster"]} />
+                <img src={this.props.movie["Poster"]} alt="movie poster" />
                 <div className="movie-res-text">
                     <p>{this.props.movie["Title"]}</p>
                 </div>

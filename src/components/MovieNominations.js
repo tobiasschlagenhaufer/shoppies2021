@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import MovieNominationCard, {holes} from './MovieNominationCard';
 import { useTransition } from 'react-spring';
 import Modal from 'react-modal';
-
-Modal.setAppElement('.App');
 
 const MovieNominations = (props) => {
 
@@ -26,7 +24,7 @@ const MovieNominations = (props) => {
 
     const lastCard = () => {
         return (
-            <div className="movie-reel">
+            <div className="movie-reel" key="last">
                 <div className="sidebar sb-lite">
                     {holes()}
                 </div>
@@ -48,7 +46,7 @@ const MovieNominations = (props) => {
             document.getElementsByClassName("movie-nom-last")[0].style.backgroundColor = "#F7F8EC";
         }
 
-        if (props.movies.length == 5) {
+        if (props.movies.length === 5) {
             openModal();
         }
     }, [props.movies]);
@@ -56,7 +54,7 @@ const MovieNominations = (props) => {
     return (
         <div className="movie-nominations">
             { movieTransition((styles, movie) => (
-                <MovieNominationCard movie={movie} key={movie["imdbID"]} styles={styles}/>
+                <MovieNominationCard movie={movie} key={'nom-'+movie["imdbID"]} styles={styles}/>
             ))}
             { lastCard() }
             <Modal
@@ -71,7 +69,7 @@ const MovieNominations = (props) => {
                     All Set!
                 </div>
                 <div className="modal-desc">
-                    Your 5 nominated movies are saved.
+                    Your 5🏆 nominated movies are saved.
                 </div>
             </Modal>
         </div>

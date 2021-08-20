@@ -56,7 +56,7 @@ const MovieResults = (props) => {
             {(showMovies.length > 0) ? <button className="res-btn" onClick={back}>{'<'}</button> : null}
             <div className="movie-res-cards">
                 {(right ? showMoviesTransitionRight : showMoviesTransitionLeft)((styles, movie) => {
-                    return <MovieResultCard movie={movie} key={movie["imdbID"]} style={styles}/>
+                    return <MovieResultCard movie={movie} key={'res-'+movie["imdbID"]} style={styles}/>
                     
                 })}
             </div>

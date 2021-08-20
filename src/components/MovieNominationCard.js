@@ -14,7 +14,7 @@ export const holes = () => {
 }
 
 const MovieNominationCard = (props) => {
-    const [{ y, color }, set] = useSpring(() => ({ y: 100 }));
+    const [{ y }, set] = useSpring(() => ({ y: 100 }));
 
     const remove = () => {
         document.getElementById(props.movie["imdbID"]).style.zIndex = 99;
@@ -34,7 +34,7 @@ const MovieNominationCard = (props) => {
             </div>
             <div className="movie-reel-center">
                 <div className="movie-nom-card">
-                    <img src={props.movie["Poster"]} />
+                    <img src={props.movie["Poster"]} alt="movie poster"/>
                     <div className="movie-nom-text">
                         <p>{props.movie["Title"]}</p>
                     </div>
